@@ -1,0 +1,27 @@
+{
+  "name": "apinode-marvel",
+  "version": "1.0.0",
+  "description": "> projeto bonito",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "dev": "nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codethi/apinode-marvel.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codethi/apinode-marvel/issues"
+  },
+  "homepage": "https://github.com/codethi/apinode-marvel#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^6.0.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}
