@@ -38,7 +38,7 @@ const create = async (req, res) => {
     nome,
     identidade,
     genero,
-    imagem
+    imagem,
   });
 
   try {
@@ -47,7 +47,31 @@ const create = async (req, res) => {
       .status(201)
       .send({ message: "Personagem criado com sucesso", novoPersonagem });
   } catch (err) {
-      res.status(500).send({error: err})
+    res.status(500).send({ error: err });
+  }
+};
+
+const update = async (req, res) => {
+  const { nome, identidade, genero, imagem } = req.body;
+
+  if (!nome || !identidade || !genero || !imagem) {
+    res.status(400).send({
+      message: "Você não enviou todos os dados necessários para o cadastro",
+    });
+    return;
+  }
+
+  res.personagem.nome = nome
+  res.personagem.identidade = identidade
+  res.personagem.genero = genero
+  res.personagem.imagem = imagem
+
+  try {
+      await res.personagem.save();
+      res.send({message: "Personagem alterado com sucesso!"})
+
+  } catch (err) {
+      res.status(500).send({ error: err})
   }
 
 };
@@ -56,4 +80,5 @@ module.exports = {
   getAll,
   getById,
   create,
+  update,
 };
