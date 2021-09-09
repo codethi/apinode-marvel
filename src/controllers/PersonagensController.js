@@ -76,9 +76,19 @@ const update = async (req, res) => {
 
 };
 
+const del = async (req, res) => {
+    try {
+        await res.personagem.remove()
+        return res.send({ message: "Personagem removido com sucesso!"})
+    } catch (err) {
+        res.status(500).send({ error: err})
+    }
+}
+
 module.exports = {
   getAll,
   getById,
   create,
   update,
+  del
 };
