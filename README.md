@@ -21,3 +21,30 @@ npm run dev
 ```bash
 npm start
 ```
+## Testando a API
+
+Você pode utilizar as ferramentas:
+
+* Postman
+* Insomnia
+* Thunder Client (plugin no vsCode)
+
+Exemplos de URLs: 
+* Essa é a URL de teste padrão: http://localhost:3000/personagens
+* Para buscar por ID, Editar ou Apagar, insira o ID na URL: http://localhost:3000/personagens/5
+* Para fazer uma busca com query string, esse é um exemplo de URL: http://localhost:3000/personagens/filter?identidade=Spider-Man
+
+> Nesse site você consegue encontrar informações de personagens para testar os end-points: https://marvel.fandom.com/pt-br/wiki/Categoria:Personagens
+
+Essa é a estrutura JSON para fazer o POST e o PUT:
+
+```json
+{
+    "nome": "Peter Benjamin Paker",
+    "identidade": "Spider-Man",
+    "genero": "Masculino",
+    "imagem": "https://static.wikia.nocookie.net/marvel/images/9/96/Friendly_Neighborhood_Spider-Man_Vol_2_8_Granov_Variant_Textless.jpg/revision/latest/scale-to-width-down/333?cb=20190906235758&path-prefix=pt-br"
+}
+```
+
+Obrigado por testar e utilizar minha API, volte sempre!
