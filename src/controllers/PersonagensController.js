@@ -1,3 +1,4 @@
+const { where } = require("../models/Personagem");
 const Personagem = require("../models/Personagem");
 
 const getAll = async (req, res) => {
@@ -61,29 +62,27 @@ const update = async (req, res) => {
     return;
   }
 
-  res.personagem.nome = nome
-  res.personagem.identidade = identidade
-  res.personagem.genero = genero
-  res.personagem.imagem = imagem
+  res.personagem.nome = nome;
+  res.personagem.identidade = identidade;
+  res.personagem.genero = genero;
+  res.personagem.imagem = imagem;
 
   try {
-      await res.personagem.save();
-      res.send({message: "Personagem alterado com sucesso!"})
-
+    await res.personagem.save();
+    res.send({ message: "Personagem alterado com sucesso!" });
   } catch (err) {
-      res.status(500).send({ error: err})
+    res.status(500).send({ error: err });
   }
-
 };
 
 const del = async (req, res) => {
-    try {
-        await res.personagem.remove()
-        return res.send({ message: "Personagem removido com sucesso!"})
-    } catch (err) {
-        res.status(500).send({ error: err})
-    }
-}
+  try {
+    await res.personagem.remove();
+    return res.send({ message: "Personagem removido com sucesso!" });
+  } catch (err) {
+    return res.status(500).send({ error: err });
+  }
+};
 
 module.exports = {
   getAll,
