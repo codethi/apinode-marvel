@@ -1,4 +1,3 @@
-const { where } = require("../models/Personagem");
 const Personagem = require("../models/Personagem");
 
 const getAll = async (req, res) => {
