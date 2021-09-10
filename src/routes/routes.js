@@ -20,5 +20,6 @@ routes.delete(
   PersonagemMiddleware.validaID,
   PersonagemController.del
 );
+routes.get("/filterByName", PersonagemController.filterByName);
 
 module.exports = routes;

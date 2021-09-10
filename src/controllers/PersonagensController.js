@@ -5,7 +5,7 @@ const getAll = async (req, res) => {
     const personagens = await Personagem.find(); // Promisse
     return res.send({ personagens });
   } catch (err) {
-    res.status(500).send({ error: err });
+    res.status(500).send({ error: err.message });
   }
 };
 
@@ -20,7 +20,7 @@ const getById = async (req, res) => {
     }
     return res.send({ personagem });
   } catch (err) {
-    res.status(500).send({ error: err });
+    res.status(500).send({ error: err.message });
   }
 };
 
@@ -47,7 +47,7 @@ const create = async (req, res) => {
       .status(201)
       .send({ message: "Personagem criado com sucesso", novoPersonagem });
   } catch (err) {
-    res.status(500).send({ error: err });
+    res.status(500).send({ error: err.message });
   }
 };
 
@@ -70,7 +70,7 @@ const update = async (req, res) => {
     await res.personagem.save();
     res.send({ message: "Personagem alterado com sucesso!" });
   } catch (err) {
-    res.status(500).send({ error: err });
+    res.status(500).send({ error: err.message });
   }
 };
 
@@ -79,7 +79,22 @@ const del = async (req, res) => {
     await res.personagem.remove();
     return res.send({ message: "Personagem removido com sucesso!" });
   } catch (err) {
-    return res.status(500).send({ error: err });
+    return res.status(500).send({ erro: err.message });
+  }
+};
+
+const filterByName = async (req, res) => {
+  const nome = req.query.nome;
+  if (!nome) {
+    res.status(400).send({ erro: "Parametro não recebido" });
+    return;
+  }
+
+  try {
+    const personagens = await Personagem.find({"nome": {'$regex': `${nome}`} })
+    return res.send({personagens})
+  } catch (err) { 
+    return res.status(500).send({ error: err.message });
   }
 };
 
@@ -88,5 +103,6 @@ module.exports = {
   getById,
   create,
   update,
-  del
+  del,
+  filterByName
 };
