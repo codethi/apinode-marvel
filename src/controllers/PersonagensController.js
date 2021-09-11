@@ -3,6 +3,10 @@ const Personagem = require("../models/Personagem");
 const getAll = async (req, res) => {
   try {
     const personagens = await Personagem.find(); // Promisse
+    if (personagens.length === 0)
+      return res
+        .status(404)
+        .send({ message: "Não existem personagens cadastrados!" });
     return res.send({ personagens });
   } catch (err) {
     res.status(500).send({ error: err.message });
@@ -106,9 +110,9 @@ const filterAll = async (req, res) => {
 
   try {
     const personagens = await Personagem.find({
-      nome: { $regex: `${nome}` },
-      identidade: { $regex: `${identidade}` },
-      genero: { $regex: `${genero}` },
+      nome: { $regex: `${nome}`, $options: 'i' },
+      identidade: { $regex: `${identidade}`, $options: 'i'},
+      genero: { $regex: `${genero}`, $options: 'i'},
     });
 
     if (personagens.length === 0)

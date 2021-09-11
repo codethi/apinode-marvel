@@ -3,18 +3,15 @@ const mongoose = require('mongoose');
 const personagemSchema = new mongoose.Schema({
     nome:{
         type: String,
-        require: true,
-        lowercase: true
+        require: true
     },
     identidade:{
         type: String,
-        require: true,
-        lowercase: true
+        require: true
     },
     genero:{
         type: String,
-        require: true,
-        lowercase: true
+        require: true
     },
     imagem:{
         type: String,
