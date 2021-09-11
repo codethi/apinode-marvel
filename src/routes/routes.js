@@ -21,5 +21,6 @@ routes.delete(
   PersonagemController.del
 );
 routes.get("/filterByName", PersonagemController.filterByName);
+routes.get("/filterAll", PersonagemController.filterAll);
 
 module.exports = routes;

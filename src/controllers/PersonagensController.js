@@ -89,11 +89,31 @@ const filterByName = async (req, res) => {
     res.status(400).send({ erro: "Parametro não recebido" });
     return;
   }
+  try {
+    const personagens = await Personagem.find({ nome: { $regex: `${nome}` } });
+    return res.send({ personagens });
+  } catch (err) {
+    return res.status(500).send({ error: err.message });
+  }
+};
+
+const filterAll = async (req, res) => {
+  const { nome, identidade, genero } = req.query;
+
+    
 
   try {
-    const personagens = await Personagem.find({"nome": {'$regex': `${nome}`} })
-    return res.send({personagens})
-  } catch (err) { 
+    const personagens = await Personagem.find({
+      nome: { $regex: `${nome}` },
+      identidade: { $regex: `${identidade}` },
+      genero: { $regex: `${genero}` }
+    });
+
+    if (personagens.length === 0)
+      return res.status(404).send({ erro: "Personagem não encontrado" });
+
+    return res.send({ personagens });
+  } catch (err) {
     return res.status(500).send({ error: err.message });
   }
 };
@@ -104,5 +124,6 @@ module.exports = {
   create,
   update,
   del,
-  filterByName
+  filterByName,
+  filterAll,
 };
