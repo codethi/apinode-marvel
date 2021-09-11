@@ -98,15 +98,17 @@ const filterByName = async (req, res) => {
 };
 
 const filterAll = async (req, res) => {
-  const { nome, identidade, genero } = req.query;
+  let { nome, identidade, genero } = req.query;
 
-    
+  !nome ? (nome = "") : (nome = nome);
+  !identidade ? (identidade = "") : (identidade = identidade);
+  !genero ? (genero = "") : (genero = genero);
 
   try {
     const personagens = await Personagem.find({
       nome: { $regex: `${nome}` },
       identidade: { $regex: `${identidade}` },
-      genero: { $regex: `${genero}` }
+      genero: { $regex: `${genero}` },
     });
 
     if (personagens.length === 0)
